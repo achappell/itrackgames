@@ -1,0 +1,75 @@
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (2.5ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (1.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreatePlatforms (20130111202017)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "platform_id" integer, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130111202017')[0m
+  [1m[35m (4.4ms)[0m  commit transaction
+Migrating to RemovePlatformIdFromPlatform (20130111214957)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "platform_id" integer, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "platforms"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "platforms"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_platforms"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "altered_platforms"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20130111214957')
+  [1m[36m (3.4ms)[0m  [1mcommit transaction[0m
+Migrating to AddColumnsToPlatform (20130111222354)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (39.9ms)[0m  [1mALTER TABLE "platforms" ADD "overview" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "platforms" ADD "developer" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130111222354')[0m
+  [1m[35m (1.2ms)[0m  commit transaction
+Migrating to ChangeDataTypeForOverview (20130111232046)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TEMPORARY TABLE "altered_platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "overview" varchar(255), "developer" varchar(255)) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "platforms"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "platforms"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "overview" text(255), "developer" varchar(255)) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_platforms"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "altered_platforms"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20130111232046')
+  [1m[36m (11.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (2.8ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (1.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreatePlatforms (20130111202017)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "platform_id" integer, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130111202017')[0m
+  [1m[35m (1.1ms)[0m  commit transaction
+Migrating to RemovePlatformIdFromPlatform (20130111214957)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TEMPORARY TABLE "altered_platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "platform_id" integer, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "platforms"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "platforms"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_platforms"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_platforms"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20130111214957')
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+Migrating to AddColumnsToPlatform (20130111222354)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "platforms" ADD "overview" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "platforms" ADD "developer" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130111222354')[0m
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to ChangeDataTypeForOverview (20130111232046)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "altered_platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "overview" varchar(255), "developer" varchar(255)) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "platforms"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "platforms"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "platforms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "overview" text, "developer" varchar(255)) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_platforms"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "altered_platforms"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20130111232046')
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
