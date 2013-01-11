@@ -1,18 +1,14 @@
+require 'Nokogiri'
+require 'open-uri'
+
 class PlatformsController < ApplicationController
   # GET /platforms
   # GET /platforms.json
   def index
     @platforms = Platform.all
 
-    require 'open-uri'
-    require 'rubygems'
-    gem 'data_active'
-    require 'nokogiri'
-
     xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetPlatformsList.php'))
     platformNodes = xml.xpath("//Platforms").to_xml()
-
-    puts platformNodes
 
     Platform.many_from_xml platformNodes, [:create]
 
@@ -25,6 +21,15 @@ class PlatformsController < ApplicationController
   # GET /platforms/1
   # GET /platforms/1.json
   def show
+    @platform = Platform.find(params[:id])
+
+    xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetPlatform.php?id='+@platform.id.to_s))
+    platformNodes = xml.xpath("//Platform").first
+
+    puts platformNodes.to_s
+
+    Platform.one_from_xml platformNodes.to_xml(), [:update]
+
     @platform = Platform.find(params[:id])
 
     respond_to do |format|
