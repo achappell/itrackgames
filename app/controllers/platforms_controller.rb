@@ -1,5 +1,7 @@
-require 'Nokogiri'
 require 'open-uri'
+require 'rubygems'
+gem 'data_active'
+require 'nokogiri'
 
 class PlatformsController < ApplicationController
   # GET /platforms
