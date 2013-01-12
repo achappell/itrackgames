@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111232046) do
+ActiveRecord::Schema.define(:version => 20130111233349) do
+
+  create_table "games", :force => true do |t|
+    t.string   "GameTitle"
+    t.string   "Platform"
+    t.text     "Overview"
+    t.string   "ESRB"
+    t.integer  "platform_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "games", ["platform_id"], :name => "index_games_on_platform_id"
 
   create_table "platforms", :force => true do |t|
     t.string   "name"

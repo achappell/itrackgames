@@ -28,11 +28,24 @@ class PlatformsController < ApplicationController
     xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetPlatform.php?id='+@platform.id.to_s))
     platformNodes = xml.xpath("//Platform").first
 
-    puts platformNodes.to_s
+    @platform = Platform.one_from_xml platformNodes.to_xml(), [:update]
 
-    Platform.one_from_xml platformNodes.to_xml(), [:update]
+    xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetPlatformGames.php?platform='+@platform.id.to_s))
+    rootNode = xml.root
+    rootNode.node_name = "Games"
 
-    @platform = Platform.find(params[:id])
+    rootNode.children().each do |child|
+      platformIdNode = Nokogiri::XML::Node.new "platform_id", xml
+     platformIdNode.content = @platform.id
+      child.add_child(platformIdNode)
+    end
+
+    games = Game.many_from_xml rootNode, [:create, :update]
+
+    games.each do |game|
+      game.platform_id = @platform.id
+      puts game.GameTitle
+    end
 
     respond_to do |format|
       format.html # show.html.erb

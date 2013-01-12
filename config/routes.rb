@@ -1,5 +1,10 @@
 Icheckgames::Application.routes.draw do
-  resources :platforms
+  resources :games
+
+
+  resources :platforms do
+    resources :games
+  end
 
 
   # The priority is based upon order of creation:
@@ -51,7 +56,7 @@ Icheckgames::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+   root :to => 'platforms#index'
 
   # See how all your routes lay out with "rake routes"
 
