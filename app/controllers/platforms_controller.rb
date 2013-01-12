@@ -1,8 +1,15 @@
+require 'nokogiri'
+require 'open-uri'
 
 class PlatformsController < ApplicationController
   # GET /platforms
   # GET /platforms.json
   def index
+    xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetPlatformsList.php'))
+    platformNodes = xml.xpath("//Platforms").to_xml()
+
+    Platform.many_from_xml platformNodes, [:create, :update]
+
     @platforms = Platform.all
 
     respond_to do |format|
@@ -15,6 +22,33 @@ class PlatformsController < ApplicationController
   # GET /platforms/1.json
   def show
     @platform = Platform.find(params[:id])
+
+    if @platform.cached_at == nil || @platform.cached_at < (Time.now - 24.hours)
+      xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetPlatform.php?id='+@platform.id.to_s))
+      platformNodes = xml.xpath("//Platform").first
+
+      Platform.one_from_xml platformNodes.to_xml(), [:update]
+      @platform.cached_at = Time.now
+      @platform.save
+
+      @platform = Platform.find(params[:id])
+
+      xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetPlatformGames.php?platform='+@platform.id.to_s))
+      rootNode = xml.root
+       rootNode.node_name = "Games"
+
+      rootNode.children().each do |child|
+        platformIdNode = Nokogiri::XML::Node.new "platform_id", xml
+        platformIdNode.content = @platform.id
+        child.add_child(platformIdNode)
+      end
+
+      games = Game.many_from_xml rootNode, [:create, :update]
+
+      games.each do |game|
+        game.platform_id = @platform.id
+      end
+    end 
 
     respond_to do |format|
       format.html # show.html.erb
