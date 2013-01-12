@@ -15,11 +15,6 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
 
-    xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetGame.php?id='+@game.id.to_s))
-    gameNodes = xml.xpath("//Game").first
-
-    @game = Game.one_from_xml gameNodes.to_xml(), [:update]
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @game }
