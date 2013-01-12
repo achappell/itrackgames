@@ -60,11 +60,6 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
 
-    xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetGame.php?id='+@game.id.to_s))
-    gameNodes = xml.xpath("//Game").first
-
-    Game.one_from_xml gameNodes.to_xml(), [:update]
-
     respond_to do |format|
       if @game.update_attributes(params[:game])
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
