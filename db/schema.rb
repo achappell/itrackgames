@@ -21,19 +21,19 @@ ActiveRecord::Schema.define(:version => 20130210232404) do
   end
 
   create_table "games", :force => true do |t|
-    t.string   "GameTitle"
-    t.string   "Platform"
-    t.text     "Overview"
-    t.string   "ESRB"
+    t.string   "title"
+    t.string   "platform"
+    t.text     "overview"
+    t.string   "esrb"
     t.integer  "platform_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.datetime "cached_at"
-    t.date     "ReleaseDate"
-    t.string   "Players"
-    t.string   "Publisher"
-    t.string   "Developer"
-    t.string   "Rating"
+    t.date     "release_date"
+    t.string   "players"
+    t.string   "publisher"
+    t.string   "developer"
+    t.string   "rating"
   end
 
   add_index "games", ["platform_id"], :name => "index_games_on_platform_id"

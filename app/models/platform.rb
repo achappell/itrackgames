@@ -12,8 +12,8 @@ class Platform < ActiveRecord::Base
 
   	puts images
 
-  	@game = games.build(GameTitle: gameInfo["GameTitle"].first, Platform: gameInfo["Platform"].first,
-  						Overview: gameInfo["Overview"].first, ESRB: gameInfo["ESRB"].first)
+  	@game = games.build(GameTitle: gameInfo["title"].first, Platform: gameInfo["platform"].first,
+  						Overview: gameInfo["overview"].first, ESRB: gameInfo["esrb"].first)
 
   	images.each do |image|
   		location = image["thumb"].first()
