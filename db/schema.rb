@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210232404) do
+ActiveRecord::Schema.define(:version => 20130211035927) do
 
   create_table "game_images", :force => true do |t|
     t.integer  "game_id"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(:version => 20130210232404) do
     t.text     "overview"
     t.string   "esrb"
     t.integer  "platform_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.datetime "cached_at"
     t.date     "release_date"
     t.string   "players"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130210232404) do
     t.text     "overview"
     t.string   "developer"
     t.datetime "cached_at"
+    t.string   "rating"
   end
 
   create_table "users", :force => true do |t|

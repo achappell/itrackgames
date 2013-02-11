@@ -1,12 +1,11 @@
-require 'nokogiri'
+include PlatformsHelper
 require 'open-uri'
 
 class PlatformsController < ApplicationController
   # GET /platforms
   # GET /platforms.json
   def index
-
-    @platforms = Platform.all
+    @platforms = fetch_all_platforms
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +16,12 @@ class PlatformsController < ApplicationController
   # GET /platforms/1
   # GET /platforms/1.json
   def show
-    @platform = Platform.find(params[:id])
+    @platform = fetch_platform(params[:id])
+
+    puts @platform.name
+    puts @platform.id
+
+    @platform.add_all_games
 
     respond_to do |format|
       format.html # show.html.erb

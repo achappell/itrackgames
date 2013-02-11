@@ -10,10 +10,20 @@
   <%= @platform.overview %>
 </p>
 
+<p>
+  <b>Developer:</b>
+  <%= @platform.developer %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%= @platform.rating %>
+</p>
+
 <p>Games</p>
 <% @platform.games.each do |game| %>
 <p>
 	<b>Title:</b>
-	<%= link_to game.GameTitle, game %>
+	<%= link_to game.title, game %>
 </p>
 <% end %>
