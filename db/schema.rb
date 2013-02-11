@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124161135) do
+ActiveRecord::Schema.define(:version => 20130210232404) do
+
+  create_table "game_images", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "image_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "games", :force => true do |t|
     t.string   "GameTitle"
@@ -22,9 +29,20 @@ ActiveRecord::Schema.define(:version => 20130124161135) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.datetime "cached_at"
+    t.date     "ReleaseDate"
+    t.string   "Players"
+    t.string   "Publisher"
+    t.string   "Developer"
+    t.string   "Rating"
   end
 
   add_index "games", ["platform_id"], :name => "index_games_on_platform_id"
+
+  create_table "images", :force => true do |t|
+    t.string   "location"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "platforms", :force => true do |t|
     t.string   "name"

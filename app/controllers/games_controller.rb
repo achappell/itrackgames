@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class GamesController < ApplicationController
   # GET /games
   # GET /games.json
@@ -14,17 +16,17 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
+
+    @platform = Platform.find(@game.platform_id)
     
     if @game.cached_at == nil || @game.cached_at < (Time.now - 24.hours)
-      xml = Nokogiri::XML(open('http://thegamesdb.net/api/GetGame.php?id='+@game.id.to_s))
-      gameNodes = xml.xpath("//Game").first
+      xml = open('http://thegamesdb.net/api/GetGame.php?id='+@game.id.to_s)
 
-      Game.one_from_xml gameNodes.to_xml(), [:update]
+      require 'xmlsimple'
+      gameData = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Game' })
 
-      @game.cached_at = Time.now
-      @game.save
+      @game = @platform.add_game(gameData)
 
-      @game = Game.find(params[:id])
     end
 
     respond_to do |format|
