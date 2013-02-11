@@ -1,9 +1,9 @@
 class AddColumnsToGame < ActiveRecord::Migration
   def change
-    add_column :games, :ReleaseDate, :date
-    add_column :games, :Players, :string
-    add_column :games, :Publisher, :string
-    add_column :games, :Developer, :string
-    add_column :games, :Rating, :string
+    add_column :games, :release_date, :date
+    add_column :games, :players, :string
+    add_column :games, :publisher, :string
+    add_column :games, :developer, :string
+    add_column :games, :rating, :string
   end
 end
