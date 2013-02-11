@@ -1,0 +1,4 @@
+2013-01-29 08:41:46.156 [main] WARN  com.adobe.tve.crypto.SimpleTokenSignatureWrapperVerifier  - Failed to split token for verification: <rss version=2.0 xmlns:media=http://search.yahoo.com/mrss/><channel><title>HISTORY</title><item><title>Heart%20of%20Darkness</title><guid>103270</guid><media:rating scheme=urn:v-chip>tv-14</media:rating></item></channel></rss>
+2013-01-29 08:41:46.158 [main] ERROR com.adobe.entitlement.verifier.SimpleTokenPKISignatureVerifier  - Failed to validate token signature
+2013-01-29 08:41:46.158 [main] INFO  com.adobe.entitlement.verifier.SimpleTokenPKISignatureVerifier  - Token validated
+2013-01-29 08:41:46.159 [main] INFO  com.adobe.entitlement.verifier.SimpleTokenPKISignatureVerifier  - Token validated

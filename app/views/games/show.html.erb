@@ -19,3 +19,35 @@
   <b>Esrb:</b>
   <%= @game.ESRB %>
 </p>
+
+<p>
+  <b>Release Date:</b>
+  <%= @game.ReleaseDate %>
+</p>
+
+<p>
+  <b>Players:</b>
+  <%= @game.Players %>
+</p>
+
+<p>
+  <b>Publisher:</b>
+  <%= @game.Publisher %>
+</p>
+
+<p>
+  <b>Developer:</b>
+  <%= @game.Developer %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%= @game.Rating %>
+</p>
+
+<p>
+	<b>Images</b>
+	<% @game.images.each do |image| %>
+		<%= image_tag("http://thegamesdb.net/banners/" + image.location) %>
+	<% end %>
+</p>

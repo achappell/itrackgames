@@ -19,6 +19,7 @@ gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'xml-simple'
 
 # Gems used only for assets and not required
 # in production environments by default.
