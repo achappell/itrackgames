@@ -5,21 +5,24 @@ class Platform < ActiveRecord::Base
   attr_accessible :name, :overview, :developer, :cached_at
 
   def add_game(game_hash)
-  	gameInfo = game_hash["Game"].first
 
-  	images = gameInfo["Images"].first
-  	images = images["fanart"]
+    puts game_hash
 
-  	puts images
+  	@game = games.build(GameTitle: game_hash["title"], Platform: game_hash["platform"],
+  						Overview: game_hash["overview"], ESRB: game_hash["esrb"])
 
-  	@game = games.build(GameTitle: gameInfo["title"].first, Platform: gameInfo["platform"].first,
-  						Overview: gameInfo["overview"].first, ESRB: gameInfo["esrb"].first)
+    if game_hash["Images"]
+     images = game_hash["Images"].first
+     images = images["fanart"]
 
-  	images.each do |image|
-  		location = image["thumb"].first()
-  		puts location
-  		@game.images.build(location: location)
-  	end
+     puts images
+
+      images.each do |image|
+        location = image["thumb"].first()
+        puts location
+        @game.images.build(location: location)
+      end
+    end
 
   	@game
   end
@@ -29,6 +32,14 @@ class Platform < ActiveRecord::Base
     xml = open('http://thegamesdb.net/api/GetPlatformGames.php?platform='+self.id.to_s)
 
     game_data = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Data' })
+
+    #puts game_data["Game"]
+
+    gameInfo = game_data["Game"]
+
+    gameInfo.each do |game|
+      self.add_game(game)
+    end
 
   end
 end

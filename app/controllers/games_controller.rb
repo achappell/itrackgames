@@ -4,7 +4,15 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+
+    if params[:platform_id]
+      @platform = fetch_platform(params[:platform_id])
+      @platform.add_all_games
+
+      @games = Game.find_by_platform_id(params[:platform_id])
+    else
+      @games = Game.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,8 +32,9 @@ class GamesController < ApplicationController
 
       require 'xmlsimple'
       gameData = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Game' })
+      gameInfo = gameData["Game"].first
 
-      @game = @platform.add_game(gameData)
+      @game = @platform.add_game(gameInfo)
 
     end
 
