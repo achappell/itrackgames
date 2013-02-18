@@ -6,7 +6,7 @@ class Platform < ActiveRecord::Base
 
   def add_game(game_hash)
 
-    @game = games.where(:id => game_hash["id"]).first
+    @game = Game.find_all_by_id(game_hash["id"]).first
 
     if @game.nil?
   	 @game = games.build(title: game_hash["GameTitle"], id: game_hash["id"])
