@@ -46,7 +46,7 @@ def build_platform_from_hash(platform_hash)
 		platform = Platform.find_by_external_id(@id .first)
 	else
 		platform = Platform.new
-		platform.external_id = @id .first;
+		platform.external_id = @id.first;
 	end
 
 	if (name)
