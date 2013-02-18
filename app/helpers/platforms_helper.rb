@@ -19,7 +19,13 @@ end
 
 def fetch_platform(platform_id)
 
-	xml = open('http://thegamesdb.net/api/GetPlatform.php?id=' + platform_id)
+	updated_platform_id = platform_id
+
+	if Platform.exists?(platform_id)
+		updated_platform_id = Platform.find(platform_id).external_id
+	end
+
+	xml = open('http://thegamesdb.net/api/GetPlatform.php?id=' + updated_platform_id.to_s)
 
 	platform_data = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Data' })['Platform'].first
 
