@@ -31,7 +31,9 @@ end
 
 def build_platform_from_hash(platform_hash)
 
-	@id = platform_hash["id"]
+	id = platform_hash["id"].first
+
+	puts id
 
 	name = platform_hash["name"]
 	if (name == nil)
@@ -42,10 +44,10 @@ def build_platform_from_hash(platform_hash)
 	developer = platform_hash["developer"]
 	rating = platform_hash["Rating"]
 
-	if Platform.where(:external_id => @id.first).exists?
-		platform = Platform.find_by_external_id(@id.first)
+	if Platform.where(:external_id => id).exists?
+		platform = Platform.find_by_external_id(id)
 	else
-		platform = Platform.create( :external_id => @id.first)
+		platform = Platform.create(:external_id => id)
 	end
 
 	if (name)
