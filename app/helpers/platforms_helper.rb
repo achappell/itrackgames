@@ -45,7 +45,7 @@ def build_platform_from_hash(platform_hash)
 	if Platform.where(:external_id => @id .first).exists?
 		platform = Platform.find_by_external_id(@id .first)
 	else
-		platform = Platform.new
+		platform = Platform.create
 		platform.external_id = @id.first;
 	end
 
@@ -64,8 +64,6 @@ def build_platform_from_hash(platform_hash)
 	if (rating)
 		platform.rating = rating.first
 	end
-
-	platform.save
 
   	platform
 end
