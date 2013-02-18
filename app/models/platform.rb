@@ -2,14 +2,16 @@ require 'open-uri'
 
 class Platform < ActiveRecord::Base
   has_many :games, :dependent => :destroy, :inverse_of => :platform
-  attr_accessible :name, :overview, :developer, :cached_at
+  attr_accessible :external_id, :name, :overview, :developer, :cached_at
 
   def add_game(game_hash)
 
-    @game = Game.find_all_by_id(game_hash["id"]).first
+    id = game_hash["id"].first
 
-    if @game.nil?
-  	 @game = games.build(title: game_hash["GameTitle"], id: game_hash["id"])
+    if Game.where(:external_id => id).exists?
+  	   @game = Game.find_by_external_id(id)
+    else
+       @game = games.build(title: game_hash["GameTitle"], external_id: id)
     end
 
     if game_hash["Images"]
@@ -30,11 +32,9 @@ class Platform < ActiveRecord::Base
 
   def add_all_games
 
-    xml = open('http://thegamesdb.net/api/GetPlatformGames.php?platform='+self.id.to_s)
+    xml = open('http://thegamesdb.net/api/GetPlatformGames.php?platform='+self.external_id.to_s)
 
     game_data = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Data' })
-
-    #puts game_data["Game"]
 
     gameInfo = game_data["Game"]
 
