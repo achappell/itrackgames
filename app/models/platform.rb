@@ -6,10 +6,11 @@ class Platform < ActiveRecord::Base
 
   def add_game(game_hash)
 
-    puts game_hash
+    @game = games.where(:id => game_hash["id"]).first
 
-  	@game = games.build(GameTitle: game_hash["title"], Platform: game_hash["platform"],
-  						Overview: game_hash["overview"], ESRB: game_hash["esrb"])
+    if @game.nil?
+  	 @game = games.build(title: game_hash["GameTitle"], id: game_hash["id"])
+    end
 
     if game_hash["Images"]
      images = game_hash["Images"].first
@@ -38,8 +39,11 @@ class Platform < ActiveRecord::Base
     gameInfo = game_data["Game"]
 
     gameInfo.each do |game|
-      self.add_game(game)
+      self.add_game(game).save
+
     end
+
+    self.games
 
   end
 end

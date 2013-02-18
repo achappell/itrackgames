@@ -1,3 +1,4 @@
+include PlatformsHelper
 require 'open-uri'
 
 class GamesController < ApplicationController
@@ -9,7 +10,7 @@ class GamesController < ApplicationController
       @platform = fetch_platform(params[:platform_id])
       @platform.add_all_games
 
-      @games = Game.find_by_platform_id(params[:platform_id])
+      @games = Game.find_all_by_platform_id(params[:platform_id])
     else
       @games = Game.all
     end
