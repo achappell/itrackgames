@@ -28,8 +28,8 @@ class GamesController < ApplicationController
 
     @platform = Platform.find(@game.platform_id)
     
-    if @game.cached_at == nil || @game.cached_at < (Time.now - 24.hours)
-      xml = open('http://thegamesdb.net/api/GetGame.php?id='+@game.id.to_s)
+    #if @game.cached_at == nil || @game.cached_at < (Time.now - 24.hours)
+      xml = open('http://thegamesdb.net/api/GetGame.php?id='+@game.external_id.to_s)
 
       require 'xmlsimple'
       gameData = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Game' })
@@ -37,7 +37,7 @@ class GamesController < ApplicationController
 
       @game = @platform.add_game(gameInfo)
 
-    end
+    #end
 
     respond_to do |format|
       format.html # show.html.erb
