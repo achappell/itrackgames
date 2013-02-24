@@ -14,18 +14,38 @@ class Platform < ActiveRecord::Base
        @game = games.build(title: game_hash["GameTitle"], external_id: id)
     end
 
-    if game_hash["Images"]
-     images = game_hash["Images"].first
-     images = images["fanart"]
-
-     puts images
-
-      images.each do |image|
-        location = image["thumb"].first()
-        puts location
-        @game.images.build(location: location)
-      end
+    if game_hash["GameTitle"]
+      @game.title = game_hash["GameTitle"].first
     end
+
+    if game_hash["ReleaseDate"]
+      @game.release_date = game_hash["ReleaseDate"].first
+    end
+
+    if game_hash["Publisher"]
+      @game.publisher = game_hash["Publisher"].first
+    end
+
+    if game_hash["Developer"]
+      @game.developer = game_hash["Developer"].first
+    end
+
+    if game_hash["Overview"]
+      @game.overview = game_hash["Overview"].first
+    end
+
+    # if game_hash["Images"]
+    #  images = game_hash["Images"].first
+    #  images = images["boxart"]
+
+    #   images.each do |image|
+    #     location = image["thumb"].first()
+    #     puts location
+    #     @game.images.build(location: location)
+    #   end
+    # end
+
+    @game.cached_at = Time.now
 
   	@game
   end
