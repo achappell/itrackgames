@@ -23,6 +23,14 @@
 				<a href="/">
 				<h1>I Track Games</h1>
 				</a>
+				<div class="login-control">
+					<% if current_user %>
+					Signed in as <%= current_user.name %>!
+					<%= link_to "Sign out", logout_path %>
+					<% else %>
+					<%= link_to "Sign in", new_session_path %>
+					<% end %>
+				</div>
 			</header>
 		</div>
 		<div class="main-content-container">

@@ -1,7 +1,6 @@
 Icheckgames::Application.routes.draw do
   resources :images
-
-
+  resources :sessions
   resources :games
 
 
@@ -10,10 +9,11 @@ Icheckgames::Application.routes.draw do
   end
 
   resources :dbsync
+  resources :identities
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
-  match 'signout', to: 'sessions#destroy', as: 'signout'
+  match "/logout", to: "sessions#destroy", :as => "logout"
 
 
   # The priority is based upon order of creation:
