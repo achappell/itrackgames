@@ -15,11 +15,9 @@ end
 
 gem 'data_active'
 gem 'thin'
-gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
-gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
+gem 'omniauth-identity'
 gem 'xml-simple'
+gem 'devise'
 
 # Gems used only for assets and not required
 # in production environments by default.
