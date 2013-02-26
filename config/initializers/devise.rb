@@ -224,9 +224,9 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 
-  config.authentication_keys = [ :username ]
-  config.case_insensitive_keys = [ :username ]
-  config.strip_whitespace_keys = [ :username ]
+  config.authentication_keys = [ :email ]
+  config.case_insensitive_keys = [ :email ]
+  config.strip_whitespace_keys = [ :email ]
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine

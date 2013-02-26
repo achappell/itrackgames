@@ -1,0 +1,23 @@
+<h1>Listing game_stash_data</h1>
+
+<table>
+  <tr>
+    <th>Rating</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @game_stash_data.each do |game_stash_datum| %>
+  <tr>
+    <td><%= game_stash_datum.rating %></td>
+    <td><%= link_to 'Show', game_stash_datum %></td>
+    <td><%= link_to 'Edit', edit_game_stash_datum_path(game_stash_datum) %></td>
+    <td><%= link_to 'Destroy', game_stash_datum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Game stash datum', new_game_stash_datum_path %>

@@ -37,7 +37,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.4.0)
+    coffee-script-source (1.5.0)
     daemons (1.1.9)
     data_active (0.0.4)
       nokogiri
@@ -53,7 +53,7 @@ GEM
       multi_json (~> 1.0)
     hashie (1.2.0)
     hike (1.2.1)
-    i18n (0.6.1)
+    i18n (0.6.2)
     journey (1.0.4)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
@@ -101,7 +101,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.0.3)
-    rdoc (3.12.1)
+    rdoc (3.12.2)
       json (~> 1.4)
     sass (3.2.6)
     sass-rails (3.2.6)

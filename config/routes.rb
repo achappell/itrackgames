@@ -1,4 +1,7 @@
 Icheckgames::Application.routes.draw do
+  resources :game_stash_data
+
+
   devise_for :users
 
   resources :images
@@ -10,8 +13,6 @@ Icheckgames::Application.routes.draw do
   resources :tokens, :only => [:create, :destroy]
 
   resources :dbsync
-
-  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
