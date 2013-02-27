@@ -21,7 +21,7 @@
 </p>
 
 <p>Games</p>
-<% @platform.games.each do |game| %>
+<% @platform.games.order("title").each do |game| %>
 <p>
 	<b>Title:</b>
 	<%= link_to game.title, game %>
