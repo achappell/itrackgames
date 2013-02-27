@@ -52,10 +52,13 @@ class GameStashDataController < ApplicationController
     end
 
     @game_stash_datum.has_played = params.has_key?(:check)
+    @game_stash_datum.rating = params[:user][:rating]
+
+    @game = @game_stash_datum.game
 
     respond_to do |format|
       if @game_stash_datum.save
-        format.html { redirect_to @game_stash_datum, notice: 'Game stash datum was successfully created.' }
+        format.html { redirect_to @game, notice: 'Game stash datum was successfully created.' }
         format.json { render json: @game_stash_datum, status: :created, location: @game_stash_datum }
       else
         format.html { render action: "new" }

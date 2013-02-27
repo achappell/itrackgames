@@ -5,10 +5,32 @@
   <%= @game.title %>
 </p>
 
-<%= form_tag game_stash_data_path params: {:user_id => current_user.id, :game_id => @game.id} do %>
-  <%= label_tag :rating %>
-  <%= check_box_tag :check %>
-  <%= submit_tag %>
+<% if current_user %>
+  <% if GameStashDatum.exists?(:user_id => current_user.id, :game_id => @game.id) %>
+      <% @game_stash_datum = GameStashDatum.find_by_user_id_and_game_id(current_user.id, @game.id) %>
+  <% end %>
+
+  <%= form_tag game_stash_data_path params: {:user_id => current_user.id, :game_id => @game.id} do %>
+  <p>
+    <%= label_tag :rating %>
+    <% if @game_stash_datum %>
+      <%= select(:user, :rating, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']], { :selected => @game_stash_datum.rating.to_s }) %>
+    <% else %>
+      <%= select(:user, :rating, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']]) %>
+    <% end %>
+  </p>
+  <p>
+    <%= label_tag :has_played %>
+    <% if @game_stash_datum and @game_stash_datum.has_played %>
+      <%= check_box_tag :check, 1, true %>
+    <% else %>
+      <%= check_box_tag :check %>
+    <% end %> 
+  </p>
+  <p>
+    <%= submit_tag %>
+  </p>
+  <% end %>
 <% end %>
 
 <p>
