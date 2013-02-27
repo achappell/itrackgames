@@ -1,4 +1,6 @@
 class GameStashDataController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /game_stash_data
   # GET /game_stash_data.json
   def index
@@ -48,6 +50,8 @@ class GameStashDataController < ApplicationController
       @game_stash_datum.user_id = params[:user_id]
       @game_stash_datum.game_id = params[:game_id]
     end
+
+    @game_stash_datum.has_played = params.has_key?(:check)
 
     respond_to do |format|
       if @game_stash_datum.save

@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20130226023325) do
     t.integer  "rating"
     t.integer  "game_id"
     t.integer  "user_id"
+    t.boolean  "has_played"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
