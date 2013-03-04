@@ -7,9 +7,13 @@ class GamesController < ApplicationController
   def index
 
     if params[:platform_id]
-      @platform = fetch_platform(params[:platform_id])
-      @platform.add_all_games
-
+      if Settings.pull_from_external == 1
+        @platform = fetch_platform(params[:platform_id])
+        @platform.add_all_games
+      else
+        @platform = Platform.find(params[:id])
+      end
+    
       @games = Game.find_all_by_platform_id(params[:platform_id], :order => :title)
     else
       @games = Game.all
@@ -28,7 +32,7 @@ class GamesController < ApplicationController
 
     @platform = Platform.find(@game.platform_id)
     
-    #if @game.cached_at == nil || @game.cached_at < (Time.now - 24.hours)
+    if Settings.pull_from_external == 1
       xml = open('http://thegamesdb.net/api/GetGame.php?id='+@game.external_id.to_s)
 
       require 'xmlsimple'
@@ -36,8 +40,7 @@ class GamesController < ApplicationController
       gameInfo = gameData["Game"].first
 
       @game = @platform.add_game(gameInfo)
-
-    #end
+    end
 
     respond_to do |format|
       format.html # show.html.erb

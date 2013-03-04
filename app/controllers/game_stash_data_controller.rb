@@ -42,17 +42,16 @@ class GameStashDataController < ApplicationController
   # POST /game_stash_data
   # POST /game_stash_data.json
   def create
-
-    if GameStashDatum.exists?(:user_id => params[:user_id], :game_id => params[:game_id])
-      @game_stash_datum = GameStashDatum.find_by_user_id_and_game_id(params[:user_id], params[:game_id])
+    if GameStashDatum.exists?(:user_id => current_user.id, :game_id => params[:game_id])
+      @game_stash_datum = GameStashDatum.find_by_user_id_and_game_id(current_user.id, params[:game_id])
     else
       @game_stash_datum = GameStashDatum.new(params[:game_stash_datum])
-      @game_stash_datum.user_id = params[:user_id]
+      @game_stash_datum.user_id = current_user.id
       @game_stash_datum.game_id = params[:game_id]
     end
 
-    @game_stash_datum.has_played = params.has_key?(:check)
-    @game_stash_datum.rating = params[:user][:rating]
+    @game_stash_datum.has_played = params[:game_stash_datum][:has_played]
+    @game_stash_datum.rating = params[:game_stash_datum][:rating]
 
     @game = @game_stash_datum.game
 
