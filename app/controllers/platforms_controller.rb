@@ -1,5 +1,6 @@
 include PlatformsHelper
 require 'open-uri'
+require '_settings.rb'
 
 class PlatformsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
@@ -18,12 +19,12 @@ class PlatformsController < ApplicationController
   # GET /platforms/1
   # GET /platforms/1.json
   def show
-    @platform = fetch_platform(params[:id])
-
-    puts @platform.name
-    puts @platform.id
-
-    @platform.add_all_games
+    if Settings.pull_from_external == 1
+      @platform = fetch_platform(params[:id])
+      @platform.add_all_games
+    else
+      @platform = Platform.find(params[:id])
+    end
 
     respond_to do |format|
       format.html # show.html.erb

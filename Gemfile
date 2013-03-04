@@ -18,6 +18,7 @@ gem 'thin'
 gem 'omniauth-identity'
 gem 'xml-simple'
 gem 'devise'
+gem 'settingslogic'
 
 # Gems used only for assets and not required
 # in production environments by default.

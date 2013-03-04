@@ -1,0 +1,12 @@
+# config/application.yml
+defaults: &defaults
+  pull_from_external: false
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
