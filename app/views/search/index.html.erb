@@ -1,0 +1,22 @@
+<h1>Search</h1>
+
+<%= form_tag search_index_path do %>
+	<%= text_field_tag 'search', nil, :placeholder => 'Enter search term' %>
+	<%= submit_tag "Search" %>
+<% end %>
+
+<% if @search_results %>
+	<table>
+	  <tr>
+	    <th>Name</th>
+	  </tr>
+
+	<% @search_results.each do |game| %>
+	  <tr>
+	    <td><%= link_to game.title, game %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>
+
+<br />

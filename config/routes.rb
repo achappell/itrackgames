@@ -9,6 +9,7 @@ Icheckgames::Application.routes.draw do
   resources :platforms do
     resources :games
   end
+  resources :search
 
   resources :tokens, :only => [:create, :destroy]
 

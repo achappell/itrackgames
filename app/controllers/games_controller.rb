@@ -1,5 +1,6 @@
 include PlatformsHelper
 require 'open-uri'
+require '_settings.rb'
 
 class GamesController < ApplicationController
   # GET /games

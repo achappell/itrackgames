@@ -42,9 +42,6 @@ def build_platform_from_hash(platform_hash)
 	puts id
 
 	name = platform_hash["name"]
-	if (name == nil)
-		name = platform_hash["Platform"]
-	end
 
 	overview = platform_hash["overview"]
 	developer = platform_hash["developer"]
@@ -56,21 +53,23 @@ def build_platform_from_hash(platform_hash)
 		platform = Platform.create(:external_id => id)
 	end
 
-	if (name)
+	if name
 		platform.name = name.first
 	end
 
-	if (overview)
+	if overview
 		platform.overview = overview.first
 	end
 
-	if (developer)
+	if developer
 		platform.developer = developer.first
 	end
 
-	if (rating)
+	if rating
 		platform.rating = rating.first
 	end
+
+  	platform.save
 
   	platform
 end
