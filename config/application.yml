@@ -1,6 +1,6 @@
 # config/application.yml
 defaults: &defaults
-  pull_from_external: false
+  pull_from_external: 1
 
 development:
   <<: *defaults
