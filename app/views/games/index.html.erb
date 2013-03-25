@@ -4,26 +4,14 @@
   <tr>
     <th>Gametitle</th>
     <th>Platform</th>
-    <th>Overview</th>
-    <th>Esrb</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @games.each do |game| %>
   <tr>
-    <td><%= game.GameTitle %></td>
-    <td><%= game.Platform %></td>
-    <td><%= game.Overview %></td>
-    <td><%= game.ESRB %></td>
-    <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= game.title %></td>
+    <td><%= game.platform.name %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Game', new_game_path %>

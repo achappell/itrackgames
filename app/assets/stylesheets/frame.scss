@@ -23,6 +23,7 @@ body{
   .home-link:hover{ text-decoration: none;}
 }
 .main-navigation{
+  #search {float: right; padding-right: 20px; line-height: 45px; margin: 0; background: #425090; overflow: hidden;}
   ul{ padding: 0; margin: 0; background: #425090; overflow: hidden;
     li { float: left; padding-left: 20px; line-height: 45px;}
   }

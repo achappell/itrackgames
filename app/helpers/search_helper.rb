@@ -14,9 +14,9 @@ def search_games(search_term)
 
     	platform = Platform.where(:name => game["Platform"]).first
 
-    	puts platform
-
-      	search_results << platform.add_game(game)
+    	game = platform.add_game(game)
+    	game.save
+      	search_results << game
 
     end
 

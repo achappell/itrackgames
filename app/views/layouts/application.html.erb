@@ -27,6 +27,7 @@
 				</a>
 				
 				<nav class="main-navigation">
+					<div id="search"><%= render 'search/search' %> </div>
 					<ul>
 						<li><%= link_to 'Platforms', platforms_path %></li>
 						<% if user_signed_in? %>

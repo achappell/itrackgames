@@ -1,9 +1,6 @@
 <h1>Search</h1>
 
-<%= form_tag search_index_path do %>
-	<%= text_field_tag 'search', nil, :placeholder => 'Enter search term' %>
-	<%= submit_tag "Search" %>
-<% end %>
+<%= render 'search' %>
 
 <% if @search_results %>
 	<table>
