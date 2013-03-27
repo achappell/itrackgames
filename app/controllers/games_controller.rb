@@ -1,6 +1,5 @@
 include PlatformsHelper
 require 'open-uri'
-require '_settings.rb'
 
 class GamesController < ApplicationController
   # GET /games
@@ -8,21 +7,35 @@ class GamesController < ApplicationController
   def index
 
     if params[:platform_id]
-      if Settings.pull_from_external == 1
-        @platform = fetch_platform(params[:platform_id])
-        @platform.add_all_games
-      else
-        @platform = Platform.find(params[:id])
-      end
-    
-      @games = Game.find_all_by_platform_id(params[:platform_id], :order => :title)
+      @platform = fetch_platform(params[:platform_id])
+      @platform.add_all_games
+
+      @games = Game.find_all_by_platform_id(params[:platform_id])
     else
       @games = Game.all
     end
 
+    gamesArrayJson = [];
+
+    @games.each do |game|
+
+      gamesHash = game.attributes;
+      gamesHash["platform"] = @platform.attributes
+
+      if current_user && GameStashDatum.exists?(:game_id => game.id)
+        game_stash_datum = GameStashDatum.find_by_user_id_and_game_id(current_user.id, game.id)
+        gamesHash["game_stash_datum"] = game_stash_datum
+      else
+        gamesHash["game_stash_datum"] = {:has_played => false, :rating => 0};
+      end
+
+      gamesArrayJson << gamesHash
+
+    end
+
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @games }
+      format.json { render json: gamesArrayJson }
     end
   end
 
@@ -33,7 +46,7 @@ class GamesController < ApplicationController
 
     @platform = Platform.find(@game.platform_id)
     
-    if Settings.pull_from_external == 1
+    #if @game.cached_at == nil || @game.cached_at < (Time.now - 24.hours)
       xml = open('http://thegamesdb.net/api/GetGame.php?id='+@game.external_id.to_s)
 
       require 'xmlsimple'
@@ -41,11 +54,22 @@ class GamesController < ApplicationController
       gameInfo = gameData["Game"].first
 
       @game = @platform.add_game(gameInfo)
+
+    #end
+
+    jsonHash = @game.attributes
+    jsonHash["platform"] = @platform.attributes
+
+    if current_user && GameStashDatum.exists?(:game_id => @game.id)
+      game_stash_datum = GameStashDatum.find_by_user_id_and_game_id(current_user.id, @game.id)
+      jsonHash["game_stash_datum"] = game_stash_datum
+    else
+      jsonHash["game_stash_datum"] = {:has_played => false, :rating => 0};
     end
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @game }
+      format.json { render json: jsonHash }
     end
   end
 
