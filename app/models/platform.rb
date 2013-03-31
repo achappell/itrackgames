@@ -44,8 +44,9 @@ class Platform < ActiveRecord::Base
     
         boxart.each do |image|
           location = "http://thegamesdb.net/banners/" + image["thumb"]
-          updated_game = @game.images.build(location: location)
-          updated_game.save
+          updated_image = @game.images.build(location: location)
+          updated_image.type = :boxart
+          updated_image.save
         end
       end
 
@@ -55,8 +56,20 @@ class Platform < ActiveRecord::Base
         fanart.each do |image|
           thumb_image = image["thumb"].first
           location = "http://thegamesdb.net/banners/" + thumb_image
-          updated_game = @game.images.build(location: location)
-          updated_game.save
+          updated_image = @game.images.build(location: location)
+          updated_image.type = :fanart
+          updated_image.save
+        end
+      end
+
+      if images["banner"]
+        banner = images["banner"]
+
+        banner.each do |image|
+          location = "http://thegamesdb.net/banners/" + image["content"]
+          updated_image = @game.images.build(location: location)
+          updated_image.type = :banner
+          updated_image.save
         end
       end
     end
@@ -82,5 +95,15 @@ class Platform < ActiveRecord::Base
 
   self.games
 
+  end
+
+  def as_json(options = {})
+    {
+      id:           self.id,
+      name:         self.name,
+      overview:     self.overview,
+      developer:    self.developer,
+      rating:       self.rating
+    }
   end
 end
