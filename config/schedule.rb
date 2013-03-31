@@ -6,7 +6,3 @@ job_type :pg_dump, "cd :path && set RAILS_ENV=:environment rake :task --silent :
 every 1.day, :at => '4:30 am' do
   win_rake "importAllData"
 end
-
-every 1.week do
-
-end
