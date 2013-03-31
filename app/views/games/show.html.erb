@@ -69,8 +69,8 @@
 </p>
 
 <p>
-	<b>Images</b>
+	<p><b>Images</b></p>
 	<% @game.images.each do |image| %>
-		<%= image_tag("http://thegamesdb.net/banners/" + image.location) %>
+		<%= image_tag(image.location) %>
 	<% end %>
 </p>

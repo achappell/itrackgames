@@ -24,5 +24,6 @@ production:
   database: db_production
   pool: 5
   timeout: 5000
-  username: achappell
-  password:
+  username: itrackgames
+  password: itrackgames2013
+  host: localhost

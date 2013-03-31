@@ -34,16 +34,32 @@ class Platform < ActiveRecord::Base
       @game.overview = game_hash["Overview"].first
     end
 
-    # if game_hash["Images"]
-    #  images = game_hash["Images"].first
-    #  images = images["boxart"]
+    @game.images.clear
 
-    #   images.each do |image|
-    #     location = image["thumb"].first()
-    #     puts location
-    #     @game.images.build(location: location)
-    #   end
-    # end
+    if game_hash["Images"]
+     images = game_hash["Images"].first
+
+      if images["boxart"]
+        boxart = images["boxart"]
+    
+        boxart.each do |image|
+          location = "http://thegamesdb.net/banners/" + image["thumb"]
+          updated_game = @game.images.build(location: location)
+          updated_game.save
+        end
+      end
+
+      if images["fanart"]
+        fanart = images["fanart"]
+
+        fanart.each do |image|
+          thumb_image = image["thumb"].first
+          location = "http://thegamesdb.net/banners/" + thumb_image
+          updated_game = @game.images.build(location: location)
+          updated_game.save
+        end
+      end
+    end
 
     @game.cached_at = Time.now
 
@@ -56,14 +72,15 @@ class Platform < ActiveRecord::Base
 
     game_data = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Data' })
 
-    gameInfo = game_data["Game"]
+  if game_data["Game"]
+      gameInfo = game_data["Game"]
 
-    gameInfo.each do |game|
-      self.add_game(game).save
+      gameInfo.each do |game|
+        self.add_game(game).save
+      end
+  end
 
-    end
-
-    self.games
+  self.games
 
   end
 end
