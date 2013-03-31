@@ -14,7 +14,6 @@ group :production do
 end
 
 gem 'data_active'
-gem 'thin'
 gem 'omniauth-identity'
 gem 'xml-simple'
 gem 'devise'
