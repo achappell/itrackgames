@@ -1,5 +1,6 @@
 include PlatformsHelper
 require 'open-uri'
+require '_settings.rb'
 
 class GamesController < ApplicationController
   # GET /games
@@ -7,8 +8,10 @@ class GamesController < ApplicationController
   def index
 
     if params[:platform_id]
-      @platform = fetch_platform(params[:platform_id])
-      @platform.add_all_games
+      if Settings.pull_from_external == 1
+        @platform = fetch_platform(params[:platform_id])
+        @platform.add_all_games
+      end
 
       @games = Game.find_all_by_platform_id(params[:platform_id])
     else
@@ -19,8 +22,7 @@ class GamesController < ApplicationController
 
     @games.each do |game|
 
-      gamesHash = game.attributes;
-      gamesHash["platform"] = @platform.attributes
+      gamesHash = JSON.parse(game.to_json)
 
       if current_user && GameStashDatum.exists?(:game_id => game.id)
         game_stash_datum = GameStashDatum.find_by_user_id_and_game_id(current_user.id, game.id)
@@ -57,8 +59,8 @@ class GamesController < ApplicationController
 
     #end
 
-    jsonHash = @game.attributes
-    jsonHash["platform"] = @platform.attributes
+    jsonHash = JSON.parse(@game.to_json)
+    jsonHash["images"] = @game.images
 
     if current_user && GameStashDatum.exists?(:game_id => @game.id)
       game_stash_datum = GameStashDatum.find_by_user_id_and_game_id(current_user.id, @game.id)
