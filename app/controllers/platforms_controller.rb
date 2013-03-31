@@ -8,7 +8,11 @@ class PlatformsController < ApplicationController
   # GET /platforms
   # GET /platforms.json
   def index
-    @platforms = fetch_all_platforms
+    if Settings.pull_from_external == 1
+      @platforms = fetch_all_platforms
+    else
+      @platform = Platform.all;
+    end
 
     respond_to do |format|
       format.html # index.html.erb
