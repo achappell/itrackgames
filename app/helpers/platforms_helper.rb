@@ -10,7 +10,6 @@ def fetch_all_platforms
     platforms = []
 
     platform_data.each do |platform|
-    	puts platform
     	platforms << build_platform_from_hash(platform)
     end
 
