@@ -5,4 +5,5 @@ class Game < ActiveRecord::Base
   has_many :game_stash_datum
   has_many :users, :through => :game_stash_datum
   attr_accessible :external_id, :esrb, :title, :overview, :platform, :platform_id, :release_date, :players, :publisher, :developer, :rating
+
 end
