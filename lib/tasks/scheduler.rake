@@ -33,3 +33,29 @@ task :importAllData => :environment do
       	puts "Platform " + platform_count.to_s + " added, " + (Platform.all.count - platform_count).to_s + "remain"
 	end
 end
+
+task :import_changed_data => :environment do
+
+      require 'xmlsimple'
+
+      xml = open('http://thegamesdb.net/api/Updates.php?time=90000')
+
+      updateData = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Items'})
+
+      puts updateData
+
+      if (updateData["Game"])
+            updateData["Game"].each do |game|
+
+                  game_XML = open('http://thegamesdb.net/api/GetGame.php?id='+game.to_s)
+                  gameData = XmlSimple.xml_in(game_XML, { 'KeyAttr' => 'Game' })
+                  gameInfo = gameData["Game"].first
+
+                  platform_id = gameInfo["PlatformId"]
+                  platform = Platform.find_by_external_id(platform_id)
+
+                  updatedGame = platform.add_game(gameInfo)
+                  updatedGame.save
+            end
+      end
+end
