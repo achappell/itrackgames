@@ -11,7 +11,7 @@ class PlatformsController < ApplicationController
     if Settings.pull_from_external == 1
       @platforms = fetch_all_platforms
     else
-      @platform = Platform.all;
+      @platforms = Platform.all;
     end
 
     respond_to do |format|
