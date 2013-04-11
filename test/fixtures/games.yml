@@ -1,13 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  GameTitle: MyString
-  Platform: MyString
-  Overview: MyText
-  ESRB: MyString
+  id: 1
+  title: MyString
+  overview: MyText
+  esrb: MyString
+  platform_id: 1
+  external_id: 1
 
 two:
-  GameTitle: MyString
-  Platform: MyString
-  Overview: MyText
-  ESRB: MyString
+  id: 2
+  title: MyString
+  overview: MyText
+  esrb: MyString
+  platform_id: 2
+  external_id: 2

@@ -2,6 +2,8 @@ require 'test_helper'
 
 class PlatformsControllerTest < ActionController::TestCase
   setup do
+    @user = users(:one)
+    sign_in @user
     @platform = platforms(:one)
   end
 
@@ -18,7 +20,7 @@ class PlatformsControllerTest < ActionController::TestCase
 
   test "should create platform" do
     assert_difference('Platform.count') do
-      post :create, platform: { name: @platform.name, platform_id: @platform.platform_id }
+      post :create, platform: { name: @platform.name }
     end
 
     assert_redirected_to platform_path(assigns(:platform))
@@ -35,7 +37,8 @@ class PlatformsControllerTest < ActionController::TestCase
   end
 
   test "should update platform" do
-    put :update, id: @platform, platform: { name: @platform.name, platform_id: @platform.platform_id }
+
+    put :update, id: @platform, platform: { name: @platform.name }
     assert_redirected_to platform_path(assigns(:platform))
   end
 

@@ -2,6 +2,8 @@ require 'test_helper'
 
 class GameStashDataControllerTest < ActionController::TestCase
   setup do
+    @user = users(:one)
+    sign_in @user
     @game_stash_datum = game_stash_data(:one)
   end
 
@@ -18,10 +20,10 @@ class GameStashDataControllerTest < ActionController::TestCase
 
   test "should create game_stash_datum" do
     assert_difference('GameStashDatum.count') do
-      post :create, game_stash_datum: { rating: @game_stash_datum.rating }
+      post :create, game_stash_datum: { rating: @game_stash_datum.rating }, game_id: 1
     end
 
-    assert_redirected_to game_stash_datum_path(assigns(:game_stash_datum))
+    assert_redirected_to game_path(1)
   end
 
   test "should show game_stash_datum" do
