@@ -21,10 +21,8 @@
   </p>
   <p>
     <%= label_tag :has_played %>
-    <% if @game_stash_datum and @game_stash_datum.has_played %>
-      <%= check_box( :game_stash_datum, :has_played, {checked: true}, "1", "0") %>
-    <% else %>
-      <%= check_box( :game_stash_datum, :has_played, {}, "1", "0") %>
+    <% if @game_stash_datum %>
+      <%= check_box( :game_stash_datum, :has_played, {checked: @game_stash_datum.has_played }, "1", "0") %>
     <% end %> 
   </p>
   <p>
