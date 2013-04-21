@@ -20,6 +20,13 @@
   <%= @platform.rating %>
 </p>
 
+<p>
+<p><b>Images</b></p>
+<% @platform.images.each do |image| %>
+    <%= image_tag(image.location) %>
+<% end %>
+</p>
+
 <p>Games</p>
 <% @platform.games.order("title").each do |game| %>
 <p>

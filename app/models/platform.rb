@@ -2,6 +2,8 @@ require 'open-uri'
 
 class Platform < ActiveRecord::Base
   has_many :games, :dependent => :destroy, :inverse_of => :platform
+  has_many :platform_images
+  has_many :images, through: :platform_images
   attr_accessible :external_id, :name, :overview, :developer, :cached_at
 
   def add_game(game_hash)
