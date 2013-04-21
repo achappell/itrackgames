@@ -70,6 +70,8 @@ def build_platform_from_hash(platform_hash)
 		platform.rating = rating.first
   end
 
+  platform.images.clear
+
   if platform_hash["Images"]
     images = platform_hash["Images"].first
 
