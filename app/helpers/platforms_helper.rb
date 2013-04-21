@@ -30,6 +30,8 @@ def fetch_platform(platform_id)
 
 	platform = build_platform_from_hash(platform_data)
 
+  platform.save!
+
 	platform
 
 end
@@ -105,8 +107,6 @@ def build_platform_from_hash(platform_hash)
       end
     end
   end
-
-  	platform.save
 
   	platform
 end
