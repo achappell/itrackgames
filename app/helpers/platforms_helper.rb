@@ -66,7 +66,47 @@ def build_platform_from_hash(platform_hash)
 
 	if rating
 		platform.rating = rating.first
-	end
+  end
+
+  platform.images.clear
+
+  if platform_hash["Images"]
+    images = platform_hash["Images"].first
+
+    if images["boxart"]
+      boxart = images["boxart"]
+
+      boxart.each do |image|
+        location = "http://thegamesdb.net/banners/" + image["content"]
+        updated_image = platform.images.build(location: location)
+        updated_image.type = :boxart
+        updated_image.save
+      end
+    end
+
+    if images["fanart"]
+      fanart = images["fanart"]
+
+      fanart.each do |image|
+        thumb_image = image["thumb"].first
+        location = "http://thegamesdb.net/banners/" + thumb_image
+        updated_image = platform.images.build(location: location)
+        updated_image.type = :fanart
+        updated_image.save
+      end
+    end
+
+    if images["banner"]
+      banner = images["banner"]
+
+      banner.each do |image|
+        location = "http://thegamesdb.net/banners/" + image["content"]
+        updated_image = platform.images.build(location: location)
+        updated_image.type = :banner
+        updated_image.save
+      end
+    end
+  end
 
   	platform.save
 

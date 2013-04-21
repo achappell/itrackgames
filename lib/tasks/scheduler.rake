@@ -12,20 +12,20 @@ task :importAllData => :environment do
 
       	count = 0;
 
-      	# platform.games.each do |game|
-      	# 	xml = open('http://thegamesdb.net/api/GetGame.php?id='+game.external_id.to_s)
+      	platform.games.each do |game|
+      		xml = open('http://thegamesdb.net/api/GetGame.php?id='+game.external_id.to_s)
 
-      	# 	require 'xmlsimple'
-      	# 	gameData = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Game' })
-      	# 	gameInfo = gameData["Game"].first
+      		require 'xmlsimple'
+      		gameData = XmlSimple.xml_in(xml, { 'KeyAttr' => 'Game' })
+      		gameInfo = gameData["Game"].first
 
-      	# 	updatedGame = platform.add_game(gameInfo)
-      	# 	updatedGame.save
+      		updatedGame = platform.add_game(gameInfo)
+      		updatedGame.save
 
-      	# 	count = count + 1;
+      		count = count + 1;
 
-      	# 	puts "Game " + count.to_s + " added, " + (platform.games.count - count).to_s + " remain"
-      	# end
+      		puts "Game " + count.to_s + " added, " + (platform.games.count - count).to_s + " remain"
+      	end
 
       	platform.save;
       	platform_count = platform_count + 1;

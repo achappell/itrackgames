@@ -30,9 +30,12 @@ class PlatformsController < ApplicationController
       @platform = Platform.find(params[:id])
     end
 
+    jsonHash = JSON.parse(@platform.to_json)
+    jsonHash["images"] = @platform.images
+
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @platform }
+      format.json { render json: jsonHash }
     end
   end
 

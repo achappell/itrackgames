@@ -1,11 +1,11 @@
 
 development:
   adapter: postgresql
-  database: db_development
+  database: db_production
   pool: 5
   timeout: 5000
-  username: postgres
-  password: roxanne
+  username: itrackgames
+  password: itrackgames2013
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -16,8 +16,8 @@ test:
   database: db_test
   pool: 5
   timeout: 5000
-  username: amanda.chappell
-  password: Golden103
+  username: postgres
+  password: roxanne
   host: localhost
 
 production:
