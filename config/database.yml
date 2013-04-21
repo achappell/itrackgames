@@ -16,8 +16,8 @@ test:
   database: db_test
   pool: 5
   timeout: 5000
-  username: amanda.chappell
-  password: Golden103
+  username: postgres
+  password: roxanne
   host: localhost
 
 production:
