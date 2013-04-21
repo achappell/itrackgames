@@ -12,20 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :GameTitle %><br />
-    <%= f.text_field :GameTitle %>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :Platform %><br />
-    <%= f.text_field :Platform %>
+    <%= f.label :overview %><br />
+    <%= f.text_area :overview %>
   </div>
   <div class="field">
-    <%= f.label :Overview %><br />
-    <%= f.text_area :Overview %>
-  </div>
-  <div class="field">
-    <%= f.label :ESRB %><br />
-    <%= f.text_field :ESRB %>
+    <%= f.label :esrb %><br />
+    <%= f.text_field :esrb %>
   </div>
   <div class="actions">
     <%= f.submit %>

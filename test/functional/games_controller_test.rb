@@ -18,10 +18,10 @@ class GamesControllerTest < ActionController::TestCase
 
   test "should create game" do
     assert_difference('Game.count') do
-      post :create, game: { ESRB: @game.ESRB, GameTitle: @game.GameTitle, Overview: @game.Overview, Platform: @game.Platform }
+      post :create, game: { esrb: @game.esrb, title: @game.title, overview: @game.overview }, platform_id: 1
     end
 
-    assert_redirected_to game_path(assigns(:game))
+    assert_redirected_to platform_path(1)
   end
 
   test "should show game" do
@@ -35,7 +35,7 @@ class GamesControllerTest < ActionController::TestCase
   end
 
   test "should update game" do
-    put :update, id: @game, game: { ESRB: @game.ESRB, GameTitle: @game.GameTitle, Overview: @game.Overview, Platform: @game.Platform }
+    put :update, id: @game, game: { esrb: @game.esrb, title: @game.title, overview: @game.overview }
     assert_redirected_to game_path(assigns(:game))
   end
 

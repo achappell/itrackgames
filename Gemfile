@@ -1,10 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'rake', '>10.0.3'
 gem 'pg'
 gem 'data_active'
 gem 'omniauth-identity'
@@ -12,17 +12,13 @@ gem 'xml-simple'
 gem 'devise'
 gem 'settingslogic'
 gem 'whenever', require: false
+gem 'simplecov'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
@@ -41,5 +37,3 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-
-gem "mocha", :group => :test
