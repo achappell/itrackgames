@@ -1,0 +1,20 @@
+<section class="search-start">
+	<h1>Search for Games</h1>
+	<%= render 'search/search' %>
+	<span class="or-text">Or</span>
+	<span class="popular-platforms-text">Choose from Popular Platforms</span>
+	<ul class="popular-platforms-list">
+		<li><a href="#">Playstation 3</a></li>
+		<li><a href="#">Xbox 360</a></li>
+		<li><a href="#">Wii</a></li>
+		<li><a href="#">Nintendo DS</a></li>
+		<li><a href="#">Super NES</a></li>
+		<li><a href="#">NES</a></li>
+	</ul>
+</section>
+<section class="sign-up">
+	<!-- Insert Sign In View here -->
+	<%= link_to "Sign up", new_user_registration_path %>
+	<span> or </span>
+	<%= link_to "Log in", new_user_session_path %>
+</section>
