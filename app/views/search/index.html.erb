@@ -6,7 +6,7 @@
 	<ol class="game-list">
 	<% @search_results.each do |game| %>
 	  <li class="game">
-	  	<%= link_to image_tag("game-no-box-art.png"), game, {alt: game.title, class: "game-box-art"} %>
+	  	<%= link_to image_tag("game-no-box-art.png", {width: "100px"}), game, {alt: game.title, class: "game-box-art"} %>
 	  	<%= link_to game.title, game %>
 	  	<span class="game-platform"><%= game.platform.name %></span>
 	  	<p class="game-overview"><%= game.overview %></p>
