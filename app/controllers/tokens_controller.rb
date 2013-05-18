@@ -34,7 +34,34 @@ class TokensController < ApplicationController
       render :status=>200, :json=>{:token=>@user.authentication_token} 
     end
   end
-  
+
+  def validate
+    token = params[:auth_token]
+
+    if request.format != :json
+      render :status=>406, :json=>{:message=>"The request must be json"}
+      return
+    end
+
+    if token.nil?
+      render :status=>400, :json=>{:message=>"The request must contain the auth token"}
+      return
+    end
+
+    @user=User.find_by_authentication_token(token)
+
+    if @user.nil?
+      logger.info("User #{token} failed signin, user cannot be found.")
+      render :status=>401, :json=>{:message=>"Invalid token."}
+      return
+    end
+
+    @user.ensure_authentication_token
+    @user.save!
+
+    render :status=>200, :json=>{:token=>@user.authentication_token}
+  end
+
   def destroy
     @user=User.find_by_authentication_token(params[:id])
     if @user.nil?

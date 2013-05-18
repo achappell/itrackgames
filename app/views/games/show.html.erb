@@ -13,11 +13,11 @@
   <%= form_tag game_stash_data_path params: {:game_id => @game.id} do %>
   <p>
     <%= label_tag :rating %>
-    <% if @game_stash_datum %>
-      <%= select(:game_stash_datum, :rating, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']], { :selected => @game_stash_datum.rating.to_s }) %>
-    <% else %>
-      <%= select(:game_stash_datum, :rating, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']]) %>
-    <% end %>
+    <%= radio_button(:game_stash_datum, :rating, "1", {checked: @game_stash_datum.rating==1}) %>
+    <%= radio_button(:game_stash_datum, :rating, "2", {checked: @game_stash_datum.rating==2}) %>
+    <%= radio_button(:game_stash_datum, :rating, "3", {checked: @game_stash_datum.rating==3}) %>
+    <%= radio_button(:game_stash_datum, :rating, "4", {checked: @game_stash_datum.rating==4}) %>
+    <%= radio_button(:game_stash_datum, :rating, "5", {checked: @game_stash_datum.rating==5}) %>
   </p>
   <p>
     <%= label_tag :has_played %>

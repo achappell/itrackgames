@@ -3,7 +3,6 @@ Icheckgames::Application.routes.draw do
 
   resources :game_stash_data
 
-
   devise_for :users
 
   resources :images
@@ -14,6 +13,8 @@ Icheckgames::Application.routes.draw do
   resources :search
 
   resources :tokens, :only => [:create, :destroy]
+
+  match 'tokens/validate' => 'tokens#validate'
 
   resources :dbsync
 
