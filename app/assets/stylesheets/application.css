@@ -12,6 +12,8 @@
  *= require_self
  *= require frame
  *= require search
+ *= require jquery-star-rating
  */
+
 @import url(http://fonts.googleapis.com/css?family=Quicksand:400,700);
 h1,h2,h3,h4,h5,h6 {font-family: 'Quicksand',Arial,sans-serif;}

@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= stylesheet_link_tag "game" %>
+
 <p>
   <b>Gametitle:</b>
   <%= @game.title %>
@@ -8,26 +10,24 @@
 <% if current_user %>
   <% if GameStashDatum.exists?(:game_id => @game.id) %>
       <% @game_stash_datum = GameStashDatum.find_by_user_id_and_game_id(current_user.id, @game.id) %>
+  <% else %>
+      <% @game_stash_datum = GameStashDatum.new %>
   <% end %>
 
   <%= form_tag game_stash_data_path params: {:game_id => @game.id} do %>
-  <p>
-    <%= label_tag :rating %>
-    <%= radio_button(:game_stash_datum, :rating, "1", {checked: @game_stash_datum.rating==1}) %>
-    <%= radio_button(:game_stash_datum, :rating, "2", {checked: @game_stash_datum.rating==2}) %>
-    <%= radio_button(:game_stash_datum, :rating, "3", {checked: @game_stash_datum.rating==3}) %>
-    <%= radio_button(:game_stash_datum, :rating, "4", {checked: @game_stash_datum.rating==4}) %>
-    <%= radio_button(:game_stash_datum, :rating, "5", {checked: @game_stash_datum.rating==5}) %>
-  </p>
-  <p>
-    <%= label_tag :has_played %>
-    <% if @game_stash_datum %>
-      <%= check_box( :game_stash_datum, :has_played, {checked: @game_stash_datum.has_played }, "1", "0") %>
-    <% end %> 
-  </p>
-  <p>
-    <%= submit_tag %>
-  </p>
+    <div class="cleared">
+        <%= label_tag :has_played %>
+        <% if @game_stash_datum %>
+            <%= check_box( :game_stash_datum, :has_played, {checked: @game_stash_datum.has_played }, "1", "0") %>
+        <% end %>
+    </div>
+
+    <%= radio_button(:game_stash_datum, :rating, "1", {checked: @game_stash_datum.rating==1, class: 'star'}) %>
+    <%= radio_button(:game_stash_datum, :rating, "2", {checked: @game_stash_datum.rating==2, class: 'star'}) %>
+    <%= radio_button(:game_stash_datum, :rating, "3", {checked: @game_stash_datum.rating==3, class: 'star'}) %>
+    <%= radio_button(:game_stash_datum, :rating, "4", {checked: @game_stash_datum.rating==4, class: 'star'}) %>
+    <%= radio_button(:game_stash_datum, :rating, "5", {checked: @game_stash_datum.rating==5, class: 'star'}) %>
+    <div class="cleared"><%= submit_tag %></div>
   <% end %>
 <% end %>
 
