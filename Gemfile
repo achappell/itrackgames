@@ -8,12 +8,15 @@ gem 'rake', '>10.0.3'
 gem 'pg'
 gem 'data_active'
 gem 'omniauth-identity'
+gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'xml-simple'
 gem 'devise'
 gem 'settingslogic'
 gem 'whenever', require: false
 gem 'simplecov'
 gem 'jquery-star-rating-rails'
+gem 'omniauth-facebook-access-token'
 
 # Gems used only for assets and not required
 # in production environments by default.

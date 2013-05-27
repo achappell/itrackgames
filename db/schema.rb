@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421214702) do
+ActiveRecord::Schema.define(:version => 20130527193230) do
 
   create_table "game_images", :force => true do |t|
     t.integer  "game_id"
@@ -91,6 +91,9 @@ ActiveRecord::Schema.define(:version => 20130421214702) do
     t.datetime "updated_at",                             :null => false
     t.string   "username"
     t.string   "authentication_token"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

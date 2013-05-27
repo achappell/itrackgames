@@ -3,7 +3,7 @@ Icheckgames::Application.routes.draw do
 
   resources :game_stash_data
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   resources :images
   resources :games

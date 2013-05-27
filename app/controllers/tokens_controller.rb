@@ -35,6 +35,12 @@ class TokensController < ApplicationController
     end
   end
 
+  def validate_for_facebook
+    facebook_token = params[:oauth_token]
+
+    @user = User.find_for_facebook_oauth(fac)
+  end
+
   def validate
     token = params[:auth_token]
 
